@@ -1,7 +1,7 @@
 hub:
   image: selenium/hub
   ports:
-    - "4445:4445"
+    - "4444:4455"
   environment:
     #- GRID_BROWSER_TIMEOUT=600000
     - GRID_TIMEOUT=180

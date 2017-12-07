@@ -3,12 +3,11 @@
 
 class FirstCest
 {
-    public static $cssElement = "//*[contains(@class,'learningPathCta') and contains(text(),'%s')]";
-    public static $price = "€300 per month";
-
-
-    public static $path = "//*[contains(@class,'pathHit__title') and contains(text(),'Front-end developer')]";
-
+    public static $pathPage = "Your new career";
+    public static $xPath = "//*[contains(@class,'pathHit__title') and contains(text(),'Front-end developer')]";
+    public static $titlePath = "FRONT-END DEVELOPER";
+    public static $price = "//*[contains(@class,'learningPathCta') and contains(text(),'%s')]";
+    public static $value = "€300 per month";
 
     public function _before(AcceptanceTester $I)
     {
@@ -20,13 +19,18 @@ class FirstCest
 
     public function pathIsVisible(AcceptanceTester $I)
     {
-        $I->amOnPage("paths");
-        $I->waitForText("Your new career");
-        $I->wait(3);
-        $I->click("Development");
-        $I->waitForElementVisible(self::$path);
-        $I->click(self::$path);
-        $result = sprintf(self::$cssElement, self::$price);
-        $I->seeElement($result);
+        $I->amOnPage("/paths");
+        $I->waitForElementVisible(self::$xPath);
+        $I->click(self::$xPath);
+        $I->waitForText(self::$titlePath);
+        $price = sprintf(self::$price, self::$value);
+        $I->waitForElementVisible($price);
     }
 }
+
+
+/*
+ * "//*[contains(@class,'learningPathCta') and contains(text(),'%s')]";
+"€300 per month";
+"//*[contains(@class,'pathHit__title') and contains(text(),'Front-end developer')]";
+ */
