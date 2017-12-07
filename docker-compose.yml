@@ -1,0 +1,22 @@
+hub:
+  image: selenium/hub
+  ports:
+    - "4445:4445"
+  environment:
+    #- GRID_BROWSER_TIMEOUT=600000
+    - GRID_TIMEOUT=180
+    #- GRID_MAX_SESSION=6
+    #- GRID_CLEAN_UP_CYCLE=600000
+    #- GRID_UNREGISTER_IF_STILL_DOWN_AFTER=600000
+  restart: always
+chrome:
+  image: selenium/node-chrome
+  ports:
+    - "5900"
+  environment:
+    - SCREEN_WIDTH=1920
+    - SCREEN_HEIGHT=1080
+  restart: always
+  links:
+    - hub
+  shm_size: 1024M
